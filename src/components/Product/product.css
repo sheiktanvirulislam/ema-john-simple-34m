@@ -1,0 +1,32 @@
+.product{
+    display: flex;
+    border-bottom: 1px solid lightgray ;  
+    margin:5px  ;
+}
+.productDetails{
+    padding: 20px;
+    margin: 20px;
+    text-align: justify;
+    font-weight: 400 ;
+    font-size: 17px ;
+}
+.productImg{
+    padding: 10px ;
+    margin: 20px ;
+
+}
+.product-name{
+ color:blue;
+ font-weight: 400 ;
+
+}
+.button{
+    width: 150px;
+    height: 30px;
+    border: 1px solid darkgray ;
+    border-radius: 06px ;
+
+    background-color: goldenrod;
+    cursor: pointer;
+      
+}  
