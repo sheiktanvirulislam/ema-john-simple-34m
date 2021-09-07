@@ -1,12 +1,14 @@
 import React from 'react';
+import 'bootstrap/dist/css/bootstrap.css';
 import './cart.css'
 const Cart = (props) => {
     const cart = props.cart;
-    console.log(cart)
+    
     // const totalPrice = cart.reduce((total,prd) =>total + prd.price,0);
     let total = 0;
     for (let i = 0; i < cart.length; i++) {
         const product = cart[i];
+        console.log("it is ",product)
         total = product.price + total;
     }
     let shipping = 0;
@@ -29,9 +31,9 @@ const Cart = (props) => {
     }
     return (
         <div className="all">
-            <h4>Order Summary</h4>
+            <h4 className="text-primary">Order Summary</h4>
             <p>Items Ordered:{cart.length}</p> 
-            <p>TotalPrice:{format(total + shipping + tax)}</p>
+            <p>TotalPrice(with Tax):{format(total + shipping + tax)}</p>
             <p><small>Tax:{tax}</small></p>
             <p><small>Shipping Cost:{format(shipping)}</small></p>
         </div>

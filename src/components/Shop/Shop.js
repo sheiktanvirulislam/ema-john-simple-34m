@@ -3,12 +3,15 @@ import fakeData from  "../../fakeData";
 import Cart from '../Cart/Cart';
 import Product from '../Product/Product';
 import "./shop.css"
+
 const Shop = () => {
     // const first10 = fakeData.slice(0,10);
     const[products,productMethod] = useState(fakeData)
     const [cart, setCart] = useState([]);
+    
     const handleAddProduct = (product1) =>{
        const newCart = [...cart,product1];
+        
        setCart(newCart);
        
 
@@ -20,7 +23,7 @@ const Shop = () => {
             <div className="product-container">
             <ul>
                 {
-                    products.map(productItem => <Product productData={productItem}
+                    products.map(productItem => <Product product={productItem}
                     handleAddProduct = {handleAddProduct}
                     >
 
