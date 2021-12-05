@@ -1,4 +1,4 @@
-.shop-container{
+.twin-container{
     display: flex;
 
 }
@@ -11,4 +11,5 @@
 }
 .product-cart{
     padding: 10px ;
+    position: sticky;
 }

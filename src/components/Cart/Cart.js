@@ -1,6 +1,7 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.css';
 import './cart.css'
+import { Link } from 'react-router-dom';
 const Cart = (props) => {
     const cart = props.cart;
     
@@ -8,8 +9,9 @@ const Cart = (props) => {
     let total = 0;
     for (let i = 0; i < cart.length; i++) {
         const product = cart[i];
-        console.log("it is ",product)
-        total = product.price + total;
+         
+        total = product.price * product.quantity + total;
+        
     }
     let shipping = 0;
  
@@ -36,6 +38,21 @@ const Cart = (props) => {
             <p>TotalPrice(with Tax):{format(total + shipping + tax)}</p>
             <p><small>Tax:{tax}</small></p>
             <p><small>Shipping Cost:{format(shipping)}</small></p>
+            <br />
+            {
+                props.children
+            }
+            {/* conditional rendering example */}
+            {/* {
+                props.showButton === true && <Link to='/review'>
+                <button className="button">Review Order</button>
+                </Link>
+            }
+            {
+              props.showButton === false && <Link to='/'>
+              <button className="button">Place Order</button>
+              </Link>
+            } */}
         </div>
     );
 };
