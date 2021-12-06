@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import {addToDatabaseCart, getDatabaseCart} from '../utilities/databaseManager';
-import fakeData from  "../../fakeData";
+
 import Cart from '../Cart/Cart';
 import Product from '../Product/Product';
 import "./shop.css"
@@ -8,23 +8,40 @@ import { Link } from 'react-router-dom';
 
 const Shop = () => {
     // const first10 = fakeData.slice(0,10);
-    const[products,productMethod] = useState(fakeData)
+    const[products,setProducts] = useState([])
     const [cart, setCart] = useState([]);
+    useEffect(()=>{
+       fetch('http://localhost:5000/products')
+       .then(res => res.json())
+       .then(data => setProducts(data))
+
+    },[])
     
 
     useEffect(()=>{
      const savedCart = getDatabaseCart();
      const keys = Object.keys(savedCart);
+     console.log(products,keys)
+    //  if (products.length > 0) {
+    //     const previousCart = keys.map(existingKey => {
+    //         const nowProduct = products.find(nowPd => nowPd.key === existingKey);
+    //         nowProduct.quantity =  savedCart[existingKey];
+            
+    //         return nowProduct;
      
-     const previousCart = keys.map(existingKey => {
-       const nowProduct = fakeData.find(nowPd => nowPd.key === existingKey);
-       nowProduct.quantity =  savedCart[existingKey];
-       
-       return nowProduct;
-
-     }) 
-     
-     setCart(previousCart) 
+    //       }) 
+          
+    //       setCart(previousCart)
+    //  }
+    fetch('http://localhost:5000/multipleProducts',{
+          method: 'POST',
+          headers: {
+                    "Content-Type": "application/json"         
+          },
+          body:JSON.stringify(keys)
+      })   
+      .then(res => res.json())
+      .then(data => setCart(data))
 
     },[])
     let newCart;

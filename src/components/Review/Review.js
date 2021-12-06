@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import fakeData from '../../fakeData';
+
 import Cart from '../Cart/Cart';
 import { Link , useHistory } from 'react-router-dom';
 import ReviewItems from '../ReviewItems/ReviewItems';
@@ -25,17 +25,26 @@ const Review = () => {
      //CARTData
       const savedCart = getDatabaseCart() ; 
       const productKeys = Object.keys(savedCart);
-     
-      const cartProducts =  productKeys.map(key2 => {
+      fetch('http://localhost:5000/multipleProducts',{
+          method: 'POST',
+          headers: {
+                    "Content-Type": "application/json"         
+          },
+          body:JSON.stringify(productKeys)
+      })   
+      .then(res => res.json())
+      .then(data => setCart(data))
+  
+      //       const cartProducts =  productKeys.map(key2 => {
       
     
-        const product = fakeData.find(pd => pd.key === key2);     
+//         const product = fakeData.find(pd => pd.key === key2);     
        
-        product.quantity = savedCart[key2];
+//         product.quantity = savedCart[key2];
       
-       return product;
-    });
-  setCart(cartProducts)  
+//        return product;
+//     });
+//   setCart(cartProducts)  
         
     },[])
     let thankYou ;
